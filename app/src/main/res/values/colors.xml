@@ -3,4 +3,17 @@
     <color name="colorPrimary">#f1b125</color>
     <color name="colorPrimaryDark">#d67b1a</color>
     <color name="colorAccent">#525252</color>
+
+
+
+    <color name="web_top">#FF9800</color>
+
+    <color name="text_color">#000000</color>
+    <color name="background_color">#673AB7</color>
+    <color name="background">#F3E4BA</color>
+    <color name="shadow_color_top">#EFD079</color>
+    <color name="shadow_color_bottom">#F6F4F1</color>
+    <color name="slider_title_background">#40000000</color>
+    <color name="thankYou_title">#FF9800</color>
+    <color name="thankYou_des">#9E9393</color>
 </resources>
