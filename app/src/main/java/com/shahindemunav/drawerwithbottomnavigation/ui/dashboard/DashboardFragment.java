@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.shahindemunav.drawerwithbottomnavigation.R;
 
 public class DashboardFragment extends Fragment {
-    ////hello word
+
 
     private DashboardViewModel dashboardViewModel;
 
