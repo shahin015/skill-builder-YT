@@ -68,6 +68,14 @@
          android:hint="Match password"
          android:id="@+id/passwoed_m"
          />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="RefCode"
+         android:id="@+id/refcode"
+
+         />
      <EditText
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -75,6 +83,7 @@
          android:id="@+id/house"
 
          />
+
      <Button
          android:layout_width="match_parent"
          android:layout_height="wrap_content"

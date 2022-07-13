@@ -47,7 +47,7 @@ public class RegsttitionFragment extends Fragment {
     private TextView email;
     private Button getEmail, regstition;
     private int REQUEST_CODE = 5;
-    private EditText ed_name, ed_mobail_account, ed_password, ed_mpassword, ed_house;
+    private EditText ed_name, ed_mobail_account, ed_password, ed_mpassword, ed_house,refcode;
     private FusedLocationProviderClient fusedLocationClient;
     private FirebaseAuth auth;
     private DatabaseReference reference;
@@ -76,6 +76,7 @@ public class RegsttitionFragment extends Fragment {
         ed_password = view.findViewById(R.id.passwoed_o);
         ed_mpassword = view.findViewById(R.id.passwoed_m);
         ed_house = view.findViewById(R.id.house);
+        refcode=view.findViewById(R.id.refcode);
         regstition = view.findViewById(R.id.regstition);
 
         auth=FirebaseAuth.getInstance();
@@ -122,6 +123,7 @@ public class RegsttitionFragment extends Fragment {
         String password1 = ed_password.getText().toString();
         String passwprd2 = ed_mpassword.getText().toString();
         String address = ed_house.getText().toString();
+        String rcode=refcode.getText().toString();
 
         if (name.isEmpty()) {
             ed_name.setError("Enter Your Name");
@@ -165,15 +167,19 @@ public class RegsttitionFragment extends Fragment {
             return;
         }
 
+        if (rcode.isEmpty()){
+            rcode="123456789";
+        }
+
 
         Toast.makeText(getActivity(), "All Data Valided", Toast.LENGTH_SHORT).show();
 
-        LoginIntodatabase(name, mobail, password1, emails, address);
+        LoginIntodatabase(name, mobail, password1, emails, address,rcode);
 
 
     }
 
-    private void LoginIntodatabase(String name, String mobail, String password1, String emails, String address) {
+    private void LoginIntodatabase(String name, String mobail, String password1, String emails, String address,String rcode) {
 
         Dexter.withActivity(getActivity())
                 .withPermissions(Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -234,6 +240,7 @@ public class RegsttitionFragment extends Fragment {
                                     user.put("Rcode",mobail);
                                     user.put("Latitude",Latitude);
                                     user.put("Longitude",Longitude);
+                                    user.put("rcode",rcode);
 
                                     dbref.child(key).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
