@@ -23,10 +23,19 @@
         <entry key="..\:/Users/Sr/Desktop/SkillBuiderYT/app/src/main/res/layout/content_main.xml" value="0.14" />
         <entry key="..\:/Users/Sr/Desktop/SkillBuiderYT/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/Sr/Desktop/SkillBuiderYT/app/src/main/res/layout/fragment_home.xml" value="0.16018518518518518" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/activity_regstation.xml" value="0.16847826086956522" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/app_bar_main.xml" value="0.16847826086956522" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/content_main.xml" value="0.16847826086956522" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/fragment_dashboard.xml" value="0.16847826086956522" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/fragment_gallery.xml" value="0.16847826086956522" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/fragment_notifications.xml" value="0.16847826086956522" />
+        <entry key="..\:/Users/delua/AndroidStudioProjects/skill-builder-YT/app/src/main/res/layout/fragment_regsttition.xml" value="0.2" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
