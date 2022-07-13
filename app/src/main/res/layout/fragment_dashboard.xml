@@ -1,40 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
-        android:id="@+id/layImageSlider"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
-        <soup.neumorphism.NeumorphCardView
-            android:id="@+id/neumorphCardView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="0dp"
-            app:neumorph_shadowColorDark="@color/shadow_color_bottom"
-            app:neumorph_shadowColorLight="@color/shadow_color_top"
-            >
 
-            <com.denzcoskun.imageslider.ImageSlider
-                android:id="@+id/image_slider"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:iss_auto_cycle="true"
-                app:iss_delay="0"
-                app:iss_period="3000"
-                app:iss_text_align="CENTER"
-                app:iss_title_background="@color/slider_title_background"
-                tools:ignore="MissingClass"
-                />
 
-        </soup.neumorphism.NeumorphCardView>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

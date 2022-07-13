@@ -1,9 +1,11 @@
 package com.shahindemunav.drawerwithbottomnavigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -14,6 +16,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.shahindemunav.drawerwithbottomnavigation.Regster.Regstation;
 
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -32,11 +36,13 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavView;
     private CoordinatorLayout contentView;
+    private FirebaseAuth mauth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mauth=FirebaseAuth.getInstance();
 
         initToolbar();
         initNavigation();
@@ -122,6 +128,36 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+
+        if (mauth.getCurrentUser()==null){
+            Intent i=new Intent(MainActivity.this, Regstation.class);
+
+            startActivity(i);
+
+        }
+        super.onStart();
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // toggle nav drawer on selecting action bar app icon/title
+
+        // Handle action bar actions click
+        switch (item.getItemId()) {
+
+            case R.id.logout:
+                mauth.signOut();
+                startActivity(new Intent(MainActivity.this,Regstation.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

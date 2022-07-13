@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Regster.RegsttitionFragment">
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     >
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Name"
+         android:id="@+id/ed_name"
+         />
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Mobail Bank Account "
+         android:id="@+id/ed_account"
+         />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:orientation="horizontal"
+       android:layout_height="wrap_content"
+       android:weightSum="3"
+       >
+       <TextView
+           android:layout_width="0dp"
+           android:layout_weight="2"
+           android:text="Clik Button for Get email"
+           android:textSize="12sp"
+           android:textColor="@color/black"
+           android:id="@+id/setEmail"
+           android:layout_height="wrap_content"
+           android:inputType="textEmailAddress"
+           android:clickable="false"
+           />
+       <Button
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:backgroundTint="@android:color/transparent"
+           android:textColor="@color/black"
+           android:text="Get Email"
+           android:textSize="18sp"
+           android:padding="2dp"
+           android:id="@+id/getEmail"
+           android:layout_height="wrap_content"/>
+
+
+
+   </LinearLayout>
+
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="pass word"
+         android:id="@+id/passwoed_o"
+         />
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Match password"
+         android:id="@+id/passwoed_m"
+         />
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="locqual address/house/ dis"
+         android:id="@+id/house"
+
+         />
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Regstition "
+         android:id="@+id/regstition"
+
+         />
+
+
+
+ </LinearLayout>
+
+</FrameLayout>
