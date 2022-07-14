@@ -27,4 +27,5 @@
     <color name="slider_title_background">#40000000</color>
     <color name="thankYou_title">#FF9800</color>
     <color name="thankYou_des">#9E9393</color>
+    <color name="dark_green">#023020</color>
 </resources>
