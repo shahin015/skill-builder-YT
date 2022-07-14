@@ -1,6 +1,8 @@
 package com.shahindemunav.drawerwithbottomnavigation;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -8,6 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
@@ -17,7 +20,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.shahindemunav.drawerwithbottomnavigation.Regster.Regstation;
+import com.shahindemunav.drawerwithbottomnavigation.payment.Paymnet;
 
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,6 +35,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Toast;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,12 +49,15 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavView;
     private CoordinatorLayout contentView;
     private FirebaseAuth mauth;
-
+    private ProgressDialog progressDialog;
+    private DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mauth=FirebaseAuth.getInstance();
+        progressDialog=new ProgressDialog(this);
+        reference=FirebaseDatabase.getInstance().getReference("users");
 
         initToolbar();
         initNavigation();
@@ -133,15 +148,71 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
 
+
+
+
         if (mauth.getCurrentUser()==null){
             Intent i=new Intent(MainActivity.this, Regstation.class);
-
             startActivity(i);
+
+        }else {
+            CallDataBase();
 
         }
         super.onStart();
     }
 
+    private void CallDataBase() {
+        progressDialog.setMessage("Cheacking Account Helth");
+        progressDialog.show();
+        SharedPreferences sh = getSharedPreferences("name", MODE_PRIVATE);
+        String key=sh.getString("key","");
+      /// Toast.makeText(this, "your key is: "+key, Toast.LENGTH_SHORT).show();
+        reference.child(key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String accountStatus=snapshot.child("accountStatus").getValue().toString();
+                if (accountStatus.contains("inactive")){
+                    Intent intent=new Intent(MainActivity.this, Paymnet.class);
+                    intent.putExtra("accountStatus",accountStatus);
+                    intent.putExtra("key",key);
+                    startActivity(intent);
+                    progressDialog.dismiss();
+
+
+                }else if (accountStatus.contains("Block")){
+                    Intent intent=new Intent(MainActivity.this, Paymnet.class);
+                    intent.putExtra("accountStatus",accountStatus);
+                    intent.putExtra("key",key);
+                    startActivity(intent);
+
+                    progressDialog.dismiss();
+
+                }else if (accountStatus.contains("Pending")){
+                    Intent intent=new Intent(MainActivity.this, Paymnet.class);
+                    intent.putExtra("accountStatus",accountStatus);
+                    intent.putExtra("key",key);
+                    startActivity(intent);
+                    progressDialog.dismiss();
+
+                }else {
+                    Toast.makeText(MainActivity.this, "You Account is Ok ", Toast.LENGTH_SHORT).show();
+
+                    progressDialog.dismiss();
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
 
 
     @Override

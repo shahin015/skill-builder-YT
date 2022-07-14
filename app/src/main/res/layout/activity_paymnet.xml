@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#257532"
+    tools:context=".payment.Paymnet">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You account Helth Is"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="250dp"
+        android:visibility="gone"
+        android:id="@+id/accountHelth"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/mainLayout"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/accountTitiel"
+            android:text="Account Titile"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            >
+
+            <RadioButton
+                android:id="@+id/bkash"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="bKash"
+                android:textColor="@color/white"
+
+
+
+                />
+            <RadioButton
+                android:id="@+id/nagad"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Nagad"
+                android:textColor="@color/white"
+
+
+
+                />
+            <RadioButton
+                android:id="@+id/roket"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Roket"
+                android:textColor="@color/white"/>
+
+
+
+
+            <RadioButton
+                android:id="@+id/upay"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Upay"
+                android:textColor="@color/white"
+
+
+
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <TextView
+
+            android:id="@+id/select_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:text="@string/biksh"
+            android:padding="3dp"
+            android:layout_marginTop="2dp"
+
+
+            />
+
+
+        <TextView
+            android:id="@+id/payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="You Need Send 90 taka"
+            android:padding="2dp"
+            android:layout_marginTop="2dp"
+
+
+            />
+
+        <TextView
+            android:id="@+id/tpyeofid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="account type"
+            android:padding="2dp"
+            android:layout_marginTop="2dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:id="@+id/accountNumber"
+            android:textStyle="bold"
+            android:text="account Number :01950458291"
+            android:padding="2dp"
+            android:layout_marginTop="2dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="3dp"
+            >
+            <TextView
+                android:id="@+id/youraccountNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You Account number "
+                android:textSize="16sp"
+                android:textColor="@color/white"
+
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:inputType="number"
+                android:id="@+id/account_number"
+
+                android:hint="Enter your Account Number"
+                />
+            />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:inputType="number"
+                android:id="@+id/totolapaymentTaka"
+
+                android:hint="Enter Amaount"
+                />
+
+
+            <TextView
+                android:id="@+id/tranxjetionid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transaction Id "
+                android:textSize="16sp"
+                android:textColor="@color/white"
+
+                />
+            <EditText
+                android:id="@+id/transcationId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="xyz"
+
+                />
+            />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Your Phone NO"
+                android:textColor="@color/white"
+                android:id="@+id/phoneNo"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Refcode"
+                android:textColor="@color/white"
+                android:id="@+id/fullname"
+                />
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit For Account Active"
+            android:textAllCaps="false"
+            android:id="@+id/placeorde"
+            />
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
