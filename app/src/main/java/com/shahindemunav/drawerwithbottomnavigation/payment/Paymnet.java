@@ -44,9 +44,11 @@ public class Paymnet extends AppCompatActivity {
     private LinearLayout mainLayout;
     private DatabaseReference reference2,reference;
     private ProgressDialog progressDialog;
-    private EditText account_nummber, transcationId, refcode, phone_number,amont;
+    private EditText account_nummber, transcationId, phone_number,amont;
     private Button palceorder;
+    String keys;
 
+    private String userid;
 
 
     @Override
@@ -69,6 +71,8 @@ public class Paymnet extends AppCompatActivity {
         paymentaccount=findViewById(R.id.accountNumber);
 
 
+        Toast.makeText(this, "Your Referal Code "+key, Toast.LENGTH_SHORT).show();
+
         typeofid = findViewById(R.id.tpyeofid);
 
         phone_number=findViewById(R.id.phoneNo);
@@ -79,13 +83,15 @@ public class Paymnet extends AppCompatActivity {
         payment = findViewById(R.id.payment);
         account_nummber = findViewById(R.id.account_number);
         transcationId = findViewById(R.id.transcationId);
-        refcode = findViewById(R.id.fullname);
         palceorder = findViewById(R.id.placeorde);
         reference2=FirebaseDatabase.getInstance().getReference("Mobaile");
         transcationId = findViewById(R.id.transcationId);
         progressDialog=new ProgressDialog(this);
 
         reference=FirebaseDatabase.getInstance().getReference();
+        SharedPreferences sh = getSharedPreferences("name", MODE_PRIVATE);
+        keys=sh.getString("key","");
+
 
 
 
@@ -175,13 +181,13 @@ public class Paymnet extends AppCompatActivity {
 
     private void checkValiditions() {
 
-        String account,trasngationid,refcodes,phone;
+        String account,trasngationid,phone;
         account = account_nummber.getText().toString().trim();
         trasngationid = transcationId.getText().toString().trim();
-        refcodes = refcode.getText().toString().trim();
+
         phone = phone_number.getText().toString().trim();
 
-        if (account.isEmpty() || trasngationid.isEmpty() || refcodes.isEmpty() || phone.isEmpty()) {
+        if (account.isEmpty() || trasngationid.isEmpty()  || phone.isEmpty()) {
 
             Toast.makeText(this, "Fill all The filds", Toast.LENGTH_SHORT).show();
             return;
@@ -190,12 +196,11 @@ public class Paymnet extends AppCompatActivity {
             if (bank.contains("bkash")){
                 if (trasngationid.length()==10){
 
-                    if (refcodes.length()>=3&&refcodes.length()<12){
 
                         if (phone.length()==11 ||phone.length()==14){
                             progressDialog.setMessage("Procssing Order");
                             progressDialog.show();
-                            DatasendToFirebse(account, trasngationid, refcodes, phone, bank, key);
+                            DatasendToFirebse(account, trasngationid, phone, bank, key);
 
                         }else {
 
@@ -208,13 +213,7 @@ public class Paymnet extends AppCompatActivity {
 
 
 
-                    }
-                    else {
-                        refcode.setError("Enter You Full Name ");
-                        refcode.requestFocus();
 
-                        return;
-                    }
 
 
 
@@ -232,12 +231,11 @@ public class Paymnet extends AppCompatActivity {
 
                 if (trasngationid.length()==8){
 
-                    if (refcodes.length()>=3&&refcodes.length()<12){
 
                         if (phone.length()==11 ||phone.length()==14){
                             progressDialog.setMessage("Procssing Order");
                             progressDialog.show();
-                            DatasendToFirebse(account, trasngationid, refcodes, phone, bank, key);
+                            DatasendToFirebse(account, trasngationid,  phone, bank, key);
 
                         }else {
 
@@ -251,12 +249,7 @@ public class Paymnet extends AppCompatActivity {
 
 
                     }
-                    else {
-                        refcode.setError("Enter You Full Name ");
-                        refcode.requestFocus();
 
-                        return;
-                    }
 
 
 
@@ -274,12 +267,12 @@ public class Paymnet extends AppCompatActivity {
 
                 if (trasngationid.length()==10){
 
-                    if (refcodes.length()>=3&&refcodes.length()<12){
+
 
                         if (phone.length()==11 ||phone.length()==14){
                             progressDialog.setMessage("Procssing Order");
                             progressDialog.show();
-                            DatasendToFirebse(account, trasngationid, refcodes, phone, bank, key);
+                            DatasendToFirebse(account, trasngationid,  phone, bank, key);
 
                         }else {
 
@@ -292,13 +285,8 @@ public class Paymnet extends AppCompatActivity {
 
 
 
-                    }
-                    else {
-                        refcode.setError("Enter You Full Name ");
-                        refcode.requestFocus();
 
-                        return;
-                    }
+
 
 
                 }
@@ -340,11 +328,6 @@ public class Paymnet extends AppCompatActivity {
 //                }
             }
         }
-        else {
-            account_nummber.setError("Enter Valid Account Number");
-            account_nummber.requestFocus();
-            return;
-        }
 
 
 
@@ -355,7 +338,8 @@ public class Paymnet extends AppCompatActivity {
 
 
 
-    }
+
+
 
     private void CallDataBaseForMObailNumbae() {
 
@@ -401,10 +385,9 @@ public class Paymnet extends AppCompatActivity {
     private void checkValidition() {
 
 
-        SharedPreferences sh = getSharedPreferences("name", MODE_PRIVATE);
-        String key=sh.getString("key","");
-        /// Toast.makeText(this, "your key is: "+key, Toast.LENGTH_SHORT).show();
-        reference.child("users").child(key).addValueEventListener(new ValueEventListener() {
+
+        Toast.makeText(this, "your key is: "+key, Toast.LENGTH_SHORT).show();
+        reference.child("users").child(keys).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
               String accountStatus=snapshot.child("accountStatus").getValue().toString();
@@ -422,7 +405,7 @@ public class Paymnet extends AppCompatActivity {
                 }else if (accountStatus.contains("Pending")){
 
                     mainLayout.setVisibility(View.GONE);
-                    accountHelth.setText("Your Account is "+DataFromIntent);
+                    accountHelth.setText("Your Account is "+DataFromIntent+"\n Your Key Is :"+key);
                     accountHelth.setVisibility(View.VISIBLE);
                 }
 
@@ -438,7 +421,7 @@ public class Paymnet extends AppCompatActivity {
 
     }
 
-    private void DatasendToFirebse(String account, String trasngationid, String refcode, String phone, String bank, String key)
+    private void DatasendToFirebse(String account, String trasngationid,  String phone, String bank, String key)
     {
         progressDialog.setMessage("Processing...");
         progressDialog.setCancelable(false);
@@ -446,15 +429,17 @@ public class Paymnet extends AppCompatActivity {
         HashMap<String,String>pay=new HashMap<>();
         pay.put("accountNumber",account);
         pay.put("trasngationid",trasngationid);
-        pay.put("refcode",refcode);
+        pay.put("refcode",key);
         pay.put("bank",bank);
+        pay.put("color","1");
+        pay.put("phone",phone);
         pay.put("amount",amonts);
         pay.put("key",key);
         pay.put("status","Pending");
 
 
 
-        reference.child("users").child(key).child("paymentInformetion").setValue(pay).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child("users").child(keys).child("paymentInformetion").setValue(pay).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){

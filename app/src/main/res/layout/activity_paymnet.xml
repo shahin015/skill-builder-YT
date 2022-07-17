@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:text="You account Helth Is"
         android:textSize="25sp"
-        android:textColor="@color/black"
+        android:clickable="true"
+
+        android:clipToOutline="true"
+        android:textColor="@color/white"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="250dp"
@@ -211,14 +214,6 @@
                 android:id="@+id/phoneNo"
                 />
 
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Refcode"
-                android:textColor="@color/white"
-                android:id="@+id/fullname"
-                />
 
 
         </LinearLayout>

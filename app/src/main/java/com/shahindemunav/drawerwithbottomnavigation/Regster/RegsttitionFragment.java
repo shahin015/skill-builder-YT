@@ -225,6 +225,7 @@ public class RegsttitionFragment extends Fragment {
     }
 
     private void LoginIntodatabase(String name, String mobail, String password1, String emails, String address, String rcode) {
+        permistion();
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -247,6 +248,11 @@ public class RegsttitionFragment extends Fragment {
                                 if (task.isSuccessful()) {
 
                                     String key = reference.push().getKey();
+                                    SharedPreferences sharedPref = getActivity().getSharedPreferences("name", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putString("key", key);
+                                    editor.commit();
+
                                     HashMap<String, String> user = new HashMap<>();
                                     user.put("key", key);
                                     user.put("name", name);
@@ -266,15 +272,11 @@ public class RegsttitionFragment extends Fragment {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-
-
-                                                SharedPreferences sharedPref = getActivity().getSharedPreferences("name", Context.MODE_PRIVATE);
-                                                SharedPreferences.Editor editor = sharedPref.edit();
-                                                editor.putString("key", key);
-                                                editor.commit();
                                                 progressDialog.dismiss();
                                                 Intent intent = new Intent(getActivity(), Paymnet.class);
+                                                intent.putExtra("key",key);
                                                 startActivity(intent);
+
 
 
                                             }

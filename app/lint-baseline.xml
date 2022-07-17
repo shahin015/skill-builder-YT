@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.2.1" type="baseline" client="gradle" dependencies="false" name="AGP (7.2.1)" variant="fatal" version="7.2.1">
+
+    <issue
+        id="DuplicateIds"
+        message="Duplicate id `@+id/addnotis`, already defined earlier in this layout"
+        errorLine1="            android:id=&quot;@+id/addnotis&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="159"
+            column="13"/>
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="57"
+            column="13"
+            message="Duplicate id `@+id/addnotis` originally defined here"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        message="Duplicate id `@+id/addglary`, already defined earlier in this layout"
+        errorLine1="            android:id=&quot;@+id/addglary&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="204"
+            column="13"/>
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="102"
+            column="13"
+            message="Duplicate id `@+id/addglary` originally defined here"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        message="Duplicate id `@+id/addnotis`, already defined earlier in this layout"
+        errorLine1="            android:id=&quot;@+id/addnotis&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="261"
+            column="13"/>
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="57"
+            column="13"
+            message="Duplicate id `@+id/addnotis` originally defined here"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        message="Duplicate id `@+id/addglary`, already defined earlier in this layout"
+        errorLine1="            android:id=&quot;@+id/addglary&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="306"
+            column="13"/>
+        <location
+            file="src/main/res/layout/fragment_home.xml"
+            line="102"
+            column="13"
+            message="Duplicate id `@+id/addglary` originally defined here"/>
+    </issue>
+
+</issues>
