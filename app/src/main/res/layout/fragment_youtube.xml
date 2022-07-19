@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderandPayment.Youtube">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#1E651F"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:text="Selecet What you Went For Youtube"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+
+                    android:layout_marginTop="15dp"
+                    >
+                    <RadioButton
+                        android:id="@+id/subcsrive"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:tag="s"
+
+                        android:layout_height="wrap_content"
+                        android:text="Subscribed"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/like"
+                        android:tag="s"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Like"
+                        android:textColor="@color/white"
+
+
+
+                        />
+
+                    <RadioButton
+                        android:id="@+id/comment"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:tag="s"
+                        android:layout_height="wrap_content"
+                        android:text="Comment"
+                        android:textColor="@color/white"/>
+
+
+
+
+                    <RadioButton
+                        android:id="@+id/share"
+                        android:layout_width="0dp"
+                        android:tag="s"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:textColor="@color/white"
+
+
+
+                        />
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:layout_marginTop="15dp"
+                    >
+                    <Spinner
+                        android:id="@+id/Spinner_subcsrive"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Subscribed"
+                        android:visibility="invisible"
+                        android:textSize="8sp"
+                        android:textColor="@color/white"
+                        />
+
+                    <Spinner
+                        android:id="@+id/Spinner_like"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Like"
+                        android:visibility="invisible"
+                        android:textColor="@color/white"
+
+
+
+                        />
+
+                    <Spinner
+                        android:id="@+id/Spinner_comment"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="8sp"
+                        android:layout_height="wrap_content"
+                        android:text="Comment"
+                        android:visibility="invisible"
+                        android:textColor="@color/white"/>
+
+
+
+
+                    <Spinner
+                        android:id="@+id/Spinner_share"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:visibility="invisible"
+                        android:textColor="@color/white"
+
+
+
+                        />
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/findTaka"
+                    android:text="How Much for Pay"
+                    android:textAllCaps="false"
+                    android:textSize="22sp"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/white"
+
+                    />
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:visibility="gone"
+                            android:id="@+id/sub_layout"
+                            >
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:text="Total Subscrive"
+                                android:id="@+id/Subcribe_text"
+                                android:textColor="@color/white"
+                                android:gravity="end"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+
+                                android:id="@+id/Subcribe_amount"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+
+
+
+
+
+
+
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:visibility="gone"
+
+                            android:id="@+id/like_layout"
+                            >
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:text="Total Likes"
+                                android:id="@+id/total_like"
+                                android:textColor="@color/white"
+                                android:gravity="end"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:id="@+id/like_amount"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+
+
+
+
+
+
+
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:id="@+id/commet_layout"
+                            android:visibility="gone"
+
+                            >
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:text="Total Comment"
+                                android:id="@+id/comment_detels"
+                                android:textColor="@color/white"
+                                android:gravity="end"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:id="@+id/comment_amont"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+
+
+
+
+
+
+
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:visibility="gone"
+
+                            android:id="@+id/share_layout"
+                            >
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:text="Total Share"
+                                android:id="@+id/share_detels"
+                                android:textColor="@color/white"
+                                android:gravity="end"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:id="@+id/share_amount"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+
+                                />
+
+
+
+
+
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Go For Pay"
+                            android:id="@+id/go_for_pay"
+                            />
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+                </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</FrameLayout>

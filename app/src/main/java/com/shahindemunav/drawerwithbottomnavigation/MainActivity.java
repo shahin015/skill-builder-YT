@@ -1,12 +1,14 @@
 package com.shahindemunav.drawerwithbottomnavigation;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -36,6 +38,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -53,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private DatabaseReference reference;
     private FirebaseUser mFirebaseUser ;
-    String currentUserID;
+    private ImageView imageView;
+    private String key;
+    private String userEmao="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +76,50 @@ public class MainActivity extends AppCompatActivity {
         initToolbar();
         initNavigation();
         //showBottomNavigation(false);
+
+
+    }
+
+    private void headerVideinfalite(String keys) {
+        View view=navigationView.inflateHeaderView(R.layout.nav_header_main);
+        ImageView imageView=view.findViewById(R.id.imageView);
+        TextView key=view.findViewById(R.id.key);
+        Button copy=view.findViewById(R.id.copyButton);
+        TextView currentBlcnce=view.findViewById(R.id.Curent_blacne);
+        TextView navemail=view.findViewById(R.id.nav_email);
+        TextView navename=view.findViewById(R.id.nav_name);
+
+
+        if (key!=null){
+            reference.child(keys).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String names=snapshot.child("name").getValue().toString();
+                    String emails=snapshot.child("email").getValue().toString();
+                    String yourrefkey=snapshot.child("key").getValue().toString();
+                    String coin=snapshot.child("Coin").getValue().toString();
+                    currentBlcnce.setText(coin);
+                    key.setText(yourrefkey);
+                   navemail.setText(emails);
+                   navename.setText(names);
+
+
+
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }
+
+
     }
 
     private void initToolbar() {
@@ -79,16 +130,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void initNavigation() {
+     private void initNavigation() {
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         bottomNavView = findViewById(R.id.bottom_nav_view);
         contentView = findViewById(R.id.content_view);
-
        ////////////////////////////////////////
-
-
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send,
@@ -147,6 +195,11 @@ public class MainActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         }
         else {
+            SharedPreferences sharedPreferences = getSharedPreferences("check",MODE_PRIVATE);
+            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+            myEdit.putString("check", "not ok");
+            myEdit.commit();
+            myEdit.apply();
             super.onBackPressed();
         }
 
@@ -157,13 +210,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         if (mauth.getCurrentUser()==null){
             Intent i=new Intent(MainActivity.this, Regstation.class);
             startActivity(i);
 
         }else {
-            CallDataBase();
+
+        ////   CallDataBase();
+
 
         }
         super.onStart();
@@ -173,41 +227,87 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Cheacking Account Helth");
         progressDialog.show();
         SharedPreferences sh = getSharedPreferences("name", MODE_PRIVATE);
-        String key=sh.getString("key","");
+        key=sh.getString("key","");
+        headerVideinfalite(key);
+        Intent intent=getIntent();
+        userEmao=intent.getStringExtra("email");
+
+
+
       /// Toast.makeText(this, "your key is: "+key, Toast.LENGTH_SHORT).show();
         reference.child(key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String accountStatus=snapshot.child("accountStatus").getValue().toString();
-                if (accountStatus.contains("inactive")){
-                    Intent intent=new Intent(MainActivity.this, Paymnet.class);
-                    intent.putExtra("accountStatus",accountStatus);
-                    intent.putExtra("key",key);
-                    startActivity(intent);
-                    progressDialog.dismiss();
+                String userEmail=snapshot.child("email").getValue().toString();
+                //Toast.makeText(MainActivity.this, userEmail+userEmao, Toast.LENGTH_SHORT).show();
 
 
-                }else if (accountStatus.contains("Block")){
-                    Intent intent=new Intent(MainActivity.this, Paymnet.class);
-                    intent.putExtra("accountStatus",accountStatus);
-                    intent.putExtra("key",key);
-                    startActivity(intent);
 
-                    progressDialog.dismiss();
-
-                }else if (accountStatus.contains("Pending")){
-                    Intent intent=new Intent(MainActivity.this, Paymnet.class);
-                    intent.putExtra("accountStatus",accountStatus);
-                    intent.putExtra("key",key);
-                    startActivity(intent);
-                    progressDialog.dismiss();
-
+                if (userEmao==null){
+                    Toast.makeText(MainActivity.this, "You Have To Login Frist", Toast.LENGTH_SHORT).show();
+                    Intent intent1=new Intent(MainActivity.this,Regstation.class);
+                    startActivity(intent1);
+                    finish();
                 }else {
-                    Toast.makeText(MainActivity.this, "You Account is Ok ", Toast.LENGTH_SHORT).show();
 
-                    progressDialog.dismiss();
+                    if (userEmao.equals(userEmail)){
+                       if (accountStatus.contains("inactive")){
+                            Intent intent=new Intent(MainActivity.this, Paymnet.class);
+                            intent.putExtra("accountStatus",accountStatus);
+                            intent.putExtra("key",key);
+                            startActivity(intent);
+                            progressDialog.dismiss();
+                            finish();
+                        }else if (accountStatus.contains("Block")){
+                            Intent intent=new Intent(MainActivity.this, Paymnet.class);
+                            intent.putExtra("accountStatus",accountStatus);
+                            intent.putExtra("key",key);
+                            startActivity(intent);
+                            progressDialog.dismiss();
+                            finish();
+
+                        }else if (accountStatus.contains("Pending")){
+                            Intent intent=new Intent(MainActivity.this, Paymnet.class);
+                            intent.putExtra("accountStatus",accountStatus);
+                            intent.putExtra("key",key);
+                            startActivity(intent);
+                            progressDialog.dismiss();
+                            finish();
+
+                        }else if (accountStatus.contains("Valid")){
+                            Toast.makeText(MainActivity.this, "You Account is Ok ", Toast.LENGTH_SHORT).show();
+                            SharedPreferences sharedPreferences = getSharedPreferences("check",MODE_PRIVATE);
+                            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                            myEdit.putString("check", "ok");
+                            myEdit.commit();
+                            myEdit.apply();
+                            progressDialog.dismiss();
+
+                        }else {
+                            Intent intent=new Intent(MainActivity.this, Paymnet.class);
+                            intent.putExtra("accountStatus",accountStatus);
+                            intent.putExtra("key",key);
+                            startActivity(intent);
+                            progressDialog.dismiss();
+                            finish();
+                        }
+
+                    } else {
+
+                        Toast.makeText(MainActivity.this, "We Don't Allow Dublicate Account", Toast.LENGTH_SHORT).show();
+                        Intent d=new Intent(MainActivity.this,Regstation.class);
+                        startActivity(d);
+                        progressDialog.dismiss();
+                        finish();
+
+
+                    }
 
                 }
+
+
+
 
 
             }
@@ -225,7 +325,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // toggle nav drawer on selecting action bar app icon/title
-
         // Handle action bar actions click
         switch (item.getItemId()) {
 
@@ -236,6 +335,31 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int count=1*60*1000;
+//        int totol=count*5;
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mauth.signOut();
+//            }
+//        },totol);
+
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+      //// mauth.signOut();
+
+
+    }
 }

@@ -1,35 +1,52 @@
 package com.shahindemunav.drawerwithbottomnavigation.ui.gallery;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import com.shahindemunav.drawerwithbottomnavigation.R;
 
 public class GalleryFragment extends Fragment {
+    private FrameLayout layout;
+    private ViewPager viewPager;
 
-    private GalleryViewModel galleryViewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        viewPager=root.findViewById(R.id.viewPager);
+        VewPagerAdapeter viwepagerAdapter=new VewPagerAdapeter(getChildFragmentManager());
+        viewPager.setAdapter(viwepagerAdapter);
+
+
+
         return root;
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewPager=view.findViewById(R.id.viewPager);
+
+
+
+
     }
 }

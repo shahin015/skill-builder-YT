@@ -22,9 +22,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-
-
-
     <string name="lineseven">* ফেসবুক পেইজ Skill Builder  </string>
     <string name="biksh"> 01.GO to your bKash app or Dial *247# \n 02.Choose "Send Money"
         \n 03.Enter below Bkash Account Number \n 04.Now Enter Total amount \n 05.Now enter your bKash PIN to confram the transaction
@@ -42,7 +39,6 @@
     <string name="upay"> 01.GO to your Upay app or Dial *268# \n 02.Choose "Send Money"
         \n 03.Enter below Nagad Number \n 04.Now Enter Total amount \n 05.Now enter your bKash PIN to confram the transaction
     \n 07.Copy Transaction ID from paymnet confrimation and pest the transction ID below </string>
-
 
 
 </resources>

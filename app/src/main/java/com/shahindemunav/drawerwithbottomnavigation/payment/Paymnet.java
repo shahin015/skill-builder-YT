@@ -3,7 +3,9 @@ package com.shahindemunav.drawerwithbottomnavigation.payment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.shahindemunav.drawerwithbottomnavigation.MainActivity;
 import com.shahindemunav.drawerwithbottomnavigation.R;
+import com.shahindemunav.drawerwithbottomnavigation.Regster.Regstation;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -61,6 +64,7 @@ public class Paymnet extends AppCompatActivity {
        DataFromIntent=getIntent().getStringExtra("accountStatus");
        key=getIntent().getStringExtra("key");
        accountitile=findViewById(R.id.accountTitiel);
+
        progressDialog=new ProgressDialog(getApplicationContext());
         R_bkash = findViewById(R.id.bkash);
         R_nagad = findViewById(R.id.nagad);
@@ -71,7 +75,7 @@ public class Paymnet extends AppCompatActivity {
         paymentaccount=findViewById(R.id.accountNumber);
 
 
-        Toast.makeText(this, "Your Referal Code "+key, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Your Referal Code "+key, Toast.LENGTH_SHORT).show();
 
         typeofid = findViewById(R.id.tpyeofid);
 
@@ -346,6 +350,7 @@ public class Paymnet extends AppCompatActivity {
         progressDialog.setMessage("Fatching Number");
         progressDialog.setCancelable(false);
         progressDialog.show();
+
         reference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -354,20 +359,8 @@ public class Paymnet extends AppCompatActivity {
                 mroket=snapshot.child("Roket").getValue().toString();
                 mupay=snapshot.child("Upay").getValue().toString();
                 amonts=snapshot.child("amount").getValue().toString();
-
                 payment.setText("You Have To pay Total: "+amonts);
-
-
-
-
-                    progressDialog.dismiss();
-
-
-
-
-
-
-
+                progressDialog.dismiss();
             }
 
             @Override
@@ -384,29 +377,36 @@ public class Paymnet extends AppCompatActivity {
 
     private void checkValidition() {
 
-
-
-        Toast.makeText(this, "your key is: "+key, Toast.LENGTH_SHORT).show();
+     ///   Toast.makeText(this, "your key is: "+key, Toast.LENGTH_SHORT).show();
         reference.child("users").child(keys).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
               String accountStatus=snapshot.child("accountStatus").getValue().toString();
-
-
                 if (accountStatus.contains("inactive")){
                     accountitile.setText("Your Account is "+DataFromIntent+" Payment Now For Activition");
-                }
-
-
-                if (accountStatus.contains("Block")){
+                }else if (accountStatus.contains("Block")){
                     mainLayout.setVisibility(View.GONE);
                     accountHelth.setText(DataFromIntent);
                     accountHelth.setVisibility(View.VISIBLE);
                 }else if (accountStatus.contains("Pending")){
-
                     mainLayout.setVisibility(View.GONE);
                     accountHelth.setText("Your Account is "+DataFromIntent+"\n Your Key Is :"+key);
                     accountHelth.setVisibility(View.VISIBLE);
+                }else {
+                    if (DataFromIntent==null){
+                        Toast.makeText(Paymnet.this, "Log in Now", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(Paymnet.this, Regstation.class);
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        mainLayout.setVisibility(View.GONE);
+                        accountHelth.setText("Your Account is "+DataFromIntent);
+                        accountHelth.setVisibility(View.VISIBLE);
+                    }
+
+
+
                 }
 
 
@@ -489,9 +489,37 @@ public class Paymnet extends AppCompatActivity {
     @Override
     protected void onStart() {
 
-
         checkValidition();
 
+
         super.onStart();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this)
+                .setMessage("Are  You Sure To Exit ")
+                .setTitle("press No For  Home")
+                .setCancelable(true)
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finishAndRemoveTask();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent=new Intent(Paymnet.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        dialogInterface.dismiss();
+
+                    }
+                });
+        builder.create().show();
+
+
     }
 }

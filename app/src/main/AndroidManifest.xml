@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".OrderandPayment.Alpayment"
+            android:exported="false" />
+        <activity
             android:name=".payment.Paymnet"
             android:exported="false" />
         <activity

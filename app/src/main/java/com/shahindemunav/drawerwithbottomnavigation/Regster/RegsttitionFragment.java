@@ -252,7 +252,6 @@ public class RegsttitionFragment extends Fragment {
                                     SharedPreferences.Editor editor = sharedPref.edit();
                                     editor.putString("key", key);
                                     editor.commit();
-
                                     HashMap<String, String> user = new HashMap<>();
                                     user.put("key", key);
                                     user.put("name", name);
@@ -260,7 +259,6 @@ public class RegsttitionFragment extends Fragment {
                                     user.put("password", password1);
                                     user.put("phone", mobail);
                                     user.put("address", address);
-                                    user.put("yourRcode", mobail);
                                     user.put("Latitude", Latitude);
                                     user.put("Longitude", Longitude);
                                     user.put("rcode", rcode);
@@ -275,7 +273,10 @@ public class RegsttitionFragment extends Fragment {
                                                 progressDialog.dismiss();
                                                 Intent intent = new Intent(getActivity(), Paymnet.class);
                                                 intent.putExtra("key",key);
+                                                intent.putExtra("email",emails);
+                                                intent.putExtra("accountStatus","inactive");
                                                 startActivity(intent);
+                                                getActivity().finish();
 
 
 
